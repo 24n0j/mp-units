@@ -39,7 +39,7 @@
 
 MP_UNITS_EXPORT
 namespace mp_units::si {
-template<ReferenceOf<isq::angular_measure> auto R, typename Rep>
+template<ReferenceOf<(isq::angular_measure)> auto R, typename Rep>
   requires requires(Rep v) { sin(v); } || requires(Rep v) { std::sin(v); }
 [[nodiscard]] inline QuantityOf<dimensionless> auto sin(const quantity<R, Rep>& q) noexcept
 {
@@ -53,7 +53,7 @@ template<ReferenceOf<isq::angular_measure> auto R, typename Rep>
     return quantity{sin(q.numerical_value_in(radian)), one};
 }
 
-template<ReferenceOf<isq::angular_measure> auto R, typename Rep>
+template<ReferenceOf<(isq::angular_measure)> auto R, typename Rep>
   requires requires(Rep v) { cos(v); } || requires(Rep v) { std::cos(v); }
 [[nodiscard]] inline QuantityOf<dimensionless> auto cos(const quantity<R, Rep>& q) noexcept
 {
@@ -67,7 +67,7 @@ template<ReferenceOf<isq::angular_measure> auto R, typename Rep>
     return quantity{cos(q.numerical_value_in(radian)), one};
 }
 
-template<ReferenceOf<isq::angular_measure> auto R, typename Rep>
+template<ReferenceOf<(isq::angular_measure)> auto R, typename Rep>
   requires requires(Rep v) { tan(v); } || requires(Rep v) { std::tan(v); }
 [[nodiscard]] inline QuantityOf<dimensionless> auto tan(const quantity<R, Rep>& q) noexcept
 {
@@ -83,7 +83,7 @@ template<ReferenceOf<isq::angular_measure> auto R, typename Rep>
 
 template<ReferenceOf<dimensionless> auto R, typename Rep>
   requires requires(Rep v) { asin(v); } || requires(Rep v) { std::asin(v); }
-[[nodiscard]] inline QuantityOf<isq::angular_measure> auto asin(const quantity<R, Rep>& q) noexcept
+[[nodiscard]] inline QuantityOf<(isq::angular_measure)> auto asin(const quantity<R, Rep>& q) noexcept
 {
   using std::asin;
   if constexpr (!treat_as_floating_point<Rep>) {
@@ -97,7 +97,7 @@ template<ReferenceOf<dimensionless> auto R, typename Rep>
 
 template<ReferenceOf<dimensionless> auto R, typename Rep>
   requires requires(Rep v) { acos(v); } || requires(Rep v) { std::acos(v); }
-[[nodiscard]] inline QuantityOf<isq::angular_measure> auto acos(const quantity<R, Rep>& q) noexcept
+[[nodiscard]] inline QuantityOf<(isq::angular_measure)> auto acos(const quantity<R, Rep>& q) noexcept
 {
   using std::acos;
   if constexpr (!treat_as_floating_point<Rep>) {
@@ -111,7 +111,7 @@ template<ReferenceOf<dimensionless> auto R, typename Rep>
 
 template<ReferenceOf<dimensionless> auto R, typename Rep>
   requires requires(Rep v) { atan(v); } || requires(Rep v) { std::atan(v); }
-[[nodiscard]] inline QuantityOf<isq::angular_measure> auto atan(const quantity<R, Rep>& q) noexcept
+[[nodiscard]] inline QuantityOf<(isq::angular_measure)> auto atan(const quantity<R, Rep>& q) noexcept
 {
   using std::atan;
   if constexpr (!treat_as_floating_point<Rep>) {
@@ -128,7 +128,7 @@ template<auto R1, typename Rep1, auto R2, typename Rep2>
     common_reference(R1, R2);
     requires requires { atan2(v1, v2); } || requires { std::atan2(v1, v2); };
   }
-[[nodiscard]] inline QuantityOf<isq::angular_measure> auto atan2(const quantity<R1, Rep1>& y,
+[[nodiscard]] inline QuantityOf<(isq::angular_measure)> auto atan2(const quantity<R1, Rep1>& y,
                                                                  const quantity<R2, Rep2>& x) noexcept
 {
   constexpr auto ref = common_reference(R1, R2);
