@@ -143,13 +143,13 @@ public:
   [[nodiscard]] static constexpr quantity_point min() noexcept
     requires requires { quantity_type::min(); }
   {
-    return {quantity_type::min(), PO};
+    return {quantity_type::min(), point_origin};
   }
 
   [[nodiscard]] static constexpr quantity_point max() noexcept
     requires requires { quantity_type::max(); }
   {
-    return {quantity_type::max(), PO};
+    return {quantity_type::max(), point_origin};
   }
 
   // construction, assignment, destruction
@@ -215,10 +215,10 @@ public:
   quantity_point& operator=(quantity_point&&) = default;
 
   template<detail::SameAbsolutePointOriginAs<absolute_point_origin> NewPO>
-  [[nodiscard]] constexpr MP_UNITS_CONSTRAINED_AUTO_WORKAROUND(QuantityPointOf<NewPO{}>) auto point_for(
+  [[nodiscard]] constexpr QuantityPointOf<(NewPO{})> auto point_for(
     NewPO new_origin) const
   {
-    if constexpr (is_same_v<NewPO, decltype(PO)>)
+    if constexpr (is_same_v<NewPO, decltype(point_origin)>)
       return *this;
     else
       return ::mp_units::quantity_point{*this - new_origin, new_origin};
@@ -269,14 +269,14 @@ public:
     requires detail::QuantityConvertibleTo<quantity_type, quantity<detail::make_reference(quantity_spec, U{}), Rep>>
   [[nodiscard]] constexpr QuantityPointOf<quantity_spec> auto in(U) const
   {
-    return ::mp_units::quantity_point{quantity_ref_from(PO).in(U{}), PO};
+    return ::mp_units::quantity_point{quantity_ref_from(point_origin).in(U{}), point_origin};
   }
 
   template<UnitCompatibleWith<unit, quantity_spec> U>
     requires requires(quantity_type q) { value_cast<U{}>(q); }
   [[nodiscard]] constexpr QuantityPointOf<quantity_spec> auto force_in(U) const
   {
-    return ::mp_units::quantity_point{quantity_ref_from(PO).force_in(U{}), PO};
+    return ::mp_units::quantity_point{quantity_ref_from(point_origin).force_in(U{}), point_origin};
   }
 
   // conversion operators
