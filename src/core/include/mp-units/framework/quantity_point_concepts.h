@@ -45,7 +45,7 @@ void to_base_specialization_of_absolute_point_origin(const volatile absolute_poi
 
 template<typename T>
 inline constexpr bool is_derived_from_specialization_of_absolute_point_origin =
-  requires(T* t) { to_base_specialization_of_absolute_point_origin(t); };
+  requires(T* type) { to_base_specialization_of_absolute_point_origin(type); };
 
 template<typename T>
 concept AbsolutePointOrigin = is_derived_from_specialization_of_absolute_point_origin<T> && std::is_final_v<T>;
@@ -70,7 +70,7 @@ void to_base_specialization_of_relative_point_origin(const volatile relative_poi
 
 template<typename T>
 inline constexpr bool is_derived_from_specialization_of_relative_point_origin =
-  requires(T* t) { to_base_specialization_of_relative_point_origin(t); };
+  requires(T* type) { to_base_specialization_of_relative_point_origin(type); };
 
 template<typename T>
 concept RelativePointOrigin = is_derived_from_specialization_of_relative_point_origin<T> && std::is_final_v<T>;
@@ -104,7 +104,7 @@ void to_base_specialization_of_quantity_point(const volatile quantity_point<R, P
 
 template<typename T>
 inline constexpr bool is_derived_from_specialization_of_quantity_point =
-  requires(T* t) { to_base_specialization_of_quantity_point(t); };
+  requires(T* type) { to_base_specialization_of_quantity_point(type); };
 
 template<typename T>
   requires is_derived_from_specialization_of_quantity_point<T>
