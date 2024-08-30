@@ -66,6 +66,7 @@ constexpr const char* to_text(earth_gravity_model m)
       return "EGM2008-1";
   }
   assert(false && "unsupported enum value");
+  return "unsupported enum value";
 }
 
 template<earth_gravity_model M>
